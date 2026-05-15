@@ -257,24 +257,64 @@ export default function LandingPage() {
       </section>
 
       {/* PROMO BANNER */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <motion.div 
+      <section className="relative py-24 px-4 overflow-hidden">
+        {/* Scrolling sweets background */}
+        <div className="absolute inset-0 flex flex-col justify-between gap-4 py-2 pointer-events-none select-none">
+          {/* Row 1 — left */}
+          <div className="flex gap-4 animate-marquee-left w-max">
+            {[...bestSellers, ...cakeGallery, ...bestSellers, ...cakeGallery].map((item, i) => (
+              <img
+                key={i}
+                src={item.image}
+                alt=""
+                className="h-32 w-32 object-cover rounded-2xl flex-shrink-0 opacity-90"
+              />
+            ))}
+          </div>
+          {/* Row 2 — right */}
+          <div className="flex gap-4 animate-marquee-right w-max">
+            {[...cakeGallery, ...bestSellers, ...cakeGallery, ...bestSellers].map((item, i) => (
+              <img
+                key={i}
+                src={item.image}
+                alt=""
+                className="h-32 w-32 object-cover rounded-2xl flex-shrink-0 opacity-90"
+              />
+            ))}
+          </div>
+          {/* Row 3 — left again */}
+          <div className="flex gap-4 animate-marquee-left w-max" style={{ animationDuration: "35s" }}>
+            {[...bestSellers, ...cakeGallery, ...bestSellers, ...cakeGallery].map((item, i) => (
+              <img
+                key={i}
+                src={item.image}
+                alt=""
+                className="h-32 w-32 object-cover rounded-2xl flex-shrink-0 opacity-90"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-[#2C1006]/80 backdrop-blur-[2px]" />
+
+        {/* Content */}
+        <div className="container mx-auto relative z-10">
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-xl border-2 border-dashed border-primary/30 relative"
+            className="max-w-4xl mx-auto rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl border border-white/10"
           >
-            {/* Shimmer effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full animate-[shimmer_3s_infinite]"></div>
-            
-            <div className="md:w-3/5 bg-primary p-10 text-white flex flex-col justify-center relative">
+            <div className="md:w-3/5 bg-white/10 backdrop-blur-md p-10 text-white flex flex-col justify-center relative">
+              {/* Shimmer */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_3s_infinite]" />
               <h3 className="font-serif text-3xl md:text-4xl font-bold mb-2 text-secondary">O Ticket Mágico</h3>
-              <p className="text-xl font-light mb-4">Desbloqueie sabores exclusivos</p>
-              <p className="text-primary-foreground/80 text-sm">Utilize este cupom na sua primeira compra e ganhe 15% de desconto em qualquer pedido acima de R$ 100. Uma pequena magia para adoçar o seu dia.</p>
+              <p className="text-xl font-light mb-4 text-white">Desbloqueie sabores exclusivos</p>
+              <p className="text-white/70 text-sm leading-relaxed">Utilize este cupom na sua primeira compra e ganhe 15% de desconto em qualquer pedido acima de R$ 100. Uma pequena magia para adoçar o seu dia.</p>
             </div>
-            
-            <div className="md:w-2/5 bg-white p-10 flex flex-col items-center justify-center border-t-2 md:border-t-0 md:border-l-4 border-dashed border-muted">
+
+            <div className="md:w-2/5 bg-white/95 backdrop-blur-md p-10 flex flex-col items-center justify-center border-t-2 md:border-t-0 md:border-l-4 border-dashed border-secondary/30">
               <div className="border-2 border-dashed border-secondary/50 bg-secondary/10 px-6 py-3 rounded-lg mb-6">
                 <span className="font-mono text-2xl font-bold tracking-widest text-foreground">DOCINHO15</span>
               </div>
