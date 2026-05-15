@@ -745,16 +745,32 @@ export default function LandingPage() {
       </section>
 
       {/* SOCIAL FEED */}
-      <section id="social" className="py-20 bg-background overflow-hidden">
-        <div className="container mx-auto px-4 md:px-8">
+      <section id="social" className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(135deg, #fce4ec 0%, #f8bbd0 25%, #fce4ec 50%, #fff0f5 75%, #fce4ec 100%)" }}>
+
+        {/* Floating Instagram icons background */}
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
+          <FaInstagram className="absolute text-primary/10" style={{ fontSize: 180, top: "8%", left: "2%" }} />
+          <FaInstagram className="absolute text-primary/8" style={{ fontSize: 260, top: "-5%", right: "8%" }} />
+          <FaInstagram className="absolute text-primary/10" style={{ fontSize: 120, top: "55%", left: "15%" }} />
+          <FaInstagram className="absolute text-primary/6" style={{ fontSize: 340, bottom: "-10%", right: "-2%" }} />
+          <FaInstagram className="absolute text-primary/9" style={{ fontSize: 90, top: "30%", left: "45%" }} />
+          <FaInstagram className="absolute text-primary/7" style={{ fontSize: 200, bottom: "5%", left: "38%" }} />
+          <FaInstagram className="absolute text-primary/8" style={{ fontSize: 70, top: "15%", right: "30%" }} />
+          <FaInstagram className="absolute text-primary/6" style={{ fontSize: 150, top: "65%", right: "20%" }} />
+        </div>
+
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-2">Siga o nosso Instagram</h2>
-            <p className="text-primary font-medium">@docinho.odocinho</p>
+            <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm px-5 py-2 rounded-full shadow-sm mb-4">
+              <FaInstagram className="text-primary" size={18} />
+              <span className="text-primary font-semibold text-sm">@docinho.odocinho</span>
+            </div>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-0">Siga o nosso Instagram</h2>
           </div>
 
           <div className="flex overflow-x-auto pb-8 -mx-4 px-4 md:mx-0 md:px-0 gap-4 snap-x">
             {socialPosts.map((post) => (
-              <div key={post.id} className="min-w-[250px] md:min-w-0 md:w-1/5 flex-none snap-center aspect-square relative group rounded-xl overflow-hidden cursor-pointer">
+              <div key={post.id} className="min-w-[250px] md:min-w-0 md:w-1/5 flex-none snap-center aspect-square relative group rounded-xl overflow-hidden cursor-pointer shadow-md">
                 <img src={post.image} alt="Social post" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
                 {post.hasVideo && (
