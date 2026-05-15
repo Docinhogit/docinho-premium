@@ -1,0 +1,68 @@
+Atue como um Desenvolvedor Front-end Sênior e UI/UX Designer. Crie uma landing page de e-commerce moderna, responsiva e luxuosa para uma loja de doces caseiros chamada "O docinho". O design deve ser altamente profissional, elegante e dar água na boca.
+
+**Tech Stack Recomendado:** React, Tailwind CSS (para estilização rápida e moderna) e Framer Motion (para animações suaves).
+
+**Identidade Visual e Design:**
+- **Paleta de Cores:** O design deve transmitir luxo e conforto. Utiliza uma paleta baseada em rosa elegante e tons profundos e quentes de chocolate (marrom cacau escuro) para as áreas escuras e contrastes, evitando o preto puro. Detalhes e botões de destaque devem ser em dourado para trazer o aspecto premium. O fundo principal das seções deve ser claro (branco ou off-white) para que as fotos dos produtos se destaquem, com seções de destaque usando fundos curvos em tons de rosa.
+- **Tipografia:** Uma fonte sans-serif moderna e elegante para títulos (ex: Poppins ou Montserrat) e uma fonte limpa para o corpo do texto (ex: Inter ou Roboto).
+- **Estilo de UI:** Bordas arredondadas (soft corners), sombras sutis (drop shadows) para dar profundidade aos cartões de produtos, e formas orgânicas/curvas dividindo as seções.
+
+**Estrutura da Página (Single Page Application):**
+
+1. **Header (Navegação):**
+   - Logo "O docinho" em destaque (fonte estilizada e elegante em tom chocolate ou dourado).
+   - Links de navegação: Home, Cardápio, Galeria de Bolos, Kits, Contato.
+   - Ícones no canto direito: Barra de pesquisa, Conta de Usuário, Favoritos e Carrinho de Compras (com indicador de quantidade).
+
+2. **Hero Section (Destaque Principal):**
+   - Fundo com uma forma curva na parte inferior (em tom rosa elegante).
+   - Headline impactante: "A Verdadeira Experiência do Doce Caseiro".
+   - Subtítulo: "Delicie-se com o puro sabor e luxo em cada pedaço."
+   - Botão de Call to Action (CTA) dourado com texto em tom de chocolate escuro: "Comprar Agora".
+   - Imagens flutuantes de bolos e doces premium bem recortadas.
+
+3. **Menu de Categorias Dinâmico:**
+   - Título centralizado: "O que o teu coração deseja?".
+   - Layout de cartões (cards) em linha com bordas superiores arredondadas em formato de arco.
+   - Categorias: Clássicos, Gourmet, Bolos Decorados, Sobremesas, Biscoitos.
+   - Cada cartão deve ter uma imagem de topo e o nome da categoria.
+
+4. **Seção "Mais Vendidos" (Produtos):**
+   - Título: "Favoritos dos Nossos Clientes".
+   - Grid de produtos modernos. Cada card deve conter:
+     - Imagem do doce/bolo.
+     - Nome do produto.
+     - Avaliação em estrelas douradas.
+     - Preço (com estilo de desconto, ex: de R$190 por R$150).
+     - Botão de "Adicionar ao Carrinho" (ícone de carrinho elegante).
+
+5. **Galeria de Bolos (Sessão Exclusiva):**
+   - Um carrossel ou grid dinâmico focado apenas em bolos grandes e decorados.
+   - Design clean, estilo vitrine de luxo.
+
+6. **Kits e Presentes (Sessão Exclusiva):**
+   - Área dedicada para caixas de presentes e kits de festas.
+   - Fundo escuro em tom de chocolate intenso e aveludado (ex: um marrom bem profundo) para contrastar e dar tom de exclusividade, com textos em dourado e creme/branco.
+
+7. **Nossa Promessa (Trust Badges):**
+   - Uma faixa horizontal com fundo rosa claro e formato arredondado.
+   - 4 ícones com texto: "Entrega Rápida", "Mais de 500 Receitas", "Milhares de Pedidos", "Sempre Fresco".
+
+8. **Banner Promocional (Ticket Mágico):**
+   - Um banner em formato de "Ticket" (cupom) com design atrativo.
+   - Texto: "O Ticket Mágico - Desbloqueie sabores exclusivos".
+   - Botão para resgatar desconto.
+
+9. **Social / Instagram Feed:**
+   - Título centralizado: "Siga o nosso Instagram @docinho.odocinho".
+   - Grid com 4 a 5 vídeos/imagens em formato quadrado (simulando Reels/Instagram) com ícone de "play" no centro. Efeito de hover ao passar o mouse.
+
+10. **Footer (Rodapé):**
+    - Fundo em tom de chocolate escuro ou rosa intenso.
+    - Captura de email (Newsletter) com botão de "Inscrever-se".
+    - Links rápidos (Sobre Nós, Categorias, Termos de Uso, Contato).
+    - Direitos autorais.
+
+**Comportamento Dinâmico:**
+- Crie um mock de dados (JSON no próprio código) para os produtos e categorias para que o cardápio possa ser facilmente atualizado e renderizado via `.map()`.
+- Inclua estados básicos de carrinho vazios e efeitos de *hover* nos botões e cartões para garantir que a página pareça "viva" e interativa.

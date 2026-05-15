@@ -48,7 +48,7 @@ export default function LandingPage() {
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
             <a href="#home" className="flex flex-col items-center">
-              <span className="font-serif italic text-2xl md:text-3xl text-primary font-bold">O docinho</span>
+              <span className="font-serif italic text-2xl md:text-3xl text-secondary font-bold">O docinho</span>
               <span className="w-12 h-[2px] bg-secondary mt-1 rounded-full"></span>
             </a>
           </div>
@@ -303,7 +303,7 @@ export default function LandingPage() {
       </section>
 
       {/* GIFT KITS */}
-      <section id="kits" className="py-24 bg-[#111111] text-white">
+      <section id="kits" className="py-24 bg-[#2C1006] text-white">
         <div className="container mx-auto px-4 md:px-8">
           <motion.div 
             initial="hidden"
@@ -324,7 +324,7 @@ export default function LandingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-[#1a1a1a] rounded-2xl border border-secondary/20 overflow-hidden flex flex-col group hover:border-secondary/60 transition-colors"
+                className="bg-[#3D1508] rounded-2xl border border-secondary/20 overflow-hidden flex flex-col group hover:border-secondary/60 transition-colors"
               >
                 <div className="aspect-[5/4] overflow-hidden">
                   <img src={kit.image} alt={kit.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -376,8 +376,8 @@ export default function LandingPage() {
       <section id="social" className="py-20 bg-background overflow-hidden">
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-2">O que está no teu coração?</h2>
-            <p className="text-primary font-medium">@odocinho_oficial</p>
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-2">Siga o nosso Instagram</h2>
+            <p className="text-primary font-medium">@docinho.odocinho</p>
           </div>
 
           <div className="flex overflow-x-auto pb-8 -mx-4 px-4 md:mx-0 md:px-0 gap-4 snap-x">
@@ -402,7 +402,7 @@ export default function LandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contato" className="bg-[#180810] text-white pt-20 pb-10">
+      <footer id="contato" className="bg-[#1A0805] text-white pt-20 pb-10">
         <div className="container mx-auto px-4 md:px-8">
           {/* Newsletter */}
           <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-center gap-6 mb-20 border-b border-white/10 pb-16">
