@@ -753,6 +753,37 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* CHOCOLATE DRIP DIVIDER */}
+      <div className="relative -mt-1 leading-none overflow-hidden" style={{ background: "#1A0805", height: "110px" }}>
+        <svg
+          viewBox="0 0 1440 110"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute top-0 left-0 w-full"
+          preserveAspectRatio="none"
+          style={{ display: "block" }}
+        >
+          <path
+            d="M0,0 L1440,0 L1440,30
+            Q1415,30 1410,48 Q1405,70 1390,70 Q1375,70 1370,48 Q1365,30 1340,30
+            Q1310,30 1305,52 Q1300,82 1283,82 Q1266,82 1261,52 Q1256,30 1228,30
+            Q1200,30 1195,44 Q1190,62 1175,62 Q1160,62 1155,44 Q1150,30 1122,30
+            Q1092,30 1087,58 Q1082,94 1065,94 Q1048,94 1043,58 Q1038,30 1010,30
+            Q982,30 977,46 Q972,68 957,68 Q942,68 937,46 Q932,30 905,30
+            Q876,30 871,60 Q866,96 849,96 Q832,96 827,60 Q822,30 796,30
+            Q770,30 765,42 Q760,60 745,60 Q730,60 725,42 Q720,30 694,30
+            Q666,30 661,54 Q656,86 639,86 Q622,86 617,54 Q612,30 585,30
+            Q558,30 553,44 Q548,65 533,65 Q518,65 513,44 Q508,30 481,30
+            Q453,30 448,56 Q443,88 426,88 Q409,88 404,56 Q399,30 372,30
+            Q345,30 340,46 Q335,68 320,68 Q305,68 300,46 Q295,30 268,30
+            Q240,30 235,58 Q230,92 213,92 Q196,92 191,58 Q186,30 159,30
+            Q133,30 128,44 Q123,64 108,64 Q93,64 88,44 Q83,30 57,30
+            Q30,30 25,52 Q20,78 5,78 Q0,78 0,78
+            L0,0 Z"
+            fill="#C4773B"
+          />
+        </svg>
+      </div>
+
       {/* FOOTER */}
       <footer id="contato" className="bg-[#1A0805] text-white pt-20 pb-10">
         <div className="container mx-auto px-4 md:px-8">
