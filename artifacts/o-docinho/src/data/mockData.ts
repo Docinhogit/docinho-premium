@@ -34,12 +34,12 @@ export const bestSellers = [
 ];
 
 export const cakeGallery = [
-  { id: 1, name: "Bolo Rafaello Clássico", image: imgLattice },
-  { id: 2, name: "Bolo Red Velvet Frutas", image: imgRedVelvet },
-  { id: 3, name: "Bolo Arte Noite Estrelada", image: imgVanGogh },
-  { id: 4, name: "Bolo Metalizado Rosê", image: imgMetallic },
-  { id: 5, name: "Bolo de Rosas Premium", image: imgPinkRoses },
-  { id: 6, name: "Bolo Personalizado", image: imgLadyBug },
+  { id: 1, name: "Bolo Rafaello Clássico", image: imgLattice, description: "Bolo coberto com creme de coco e amêndoas, decorado com bolinhos Rafaello. Elegância em cada fatia." },
+  { id: 2, name: "Bolo Red Velvet Frutas", image: imgRedVelvet, description: "Camadas de red velvet úmido com creme de queijo e frutas vermelhas frescas. Um clássico irresistível." },
+  { id: 3, name: "Bolo Arte Noite Estrelada", image: imgVanGogh, description: "Decoração artística inspirada em Van Gogh. Uma obra de arte comestível, única e inesquecível." },
+  { id: 4, name: "Bolo Metalizado Rosê", image: imgMetallic, description: "Acabamento metalizado com efeito espelho rosê. Glamour e sofisticação para ocasiões muito especiais." },
+  { id: 5, name: "Bolo de Rosas Premium", image: imgPinkRoses, description: "Pétalas de chantilly modeladas à mão, criando um buquê de rosas eterno e delicioso." },
+  { id: 6, name: "Bolo Personalizado", image: imgLadyBug, description: "100% personalizável para o tema da sua festa. Conte-nos o seu sonho e nós o realizamos." },
 ];
 
 export const giftKits = [

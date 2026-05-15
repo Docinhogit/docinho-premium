@@ -10,6 +10,7 @@ export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [cartItems, setCartItems] = useState(0);
   const [flippedKits, setFlippedKits] = useState<Set<number>>(new Set());
+  const [flippedCakes, setFlippedCakes] = useState<Set<number>>(new Set());
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const { toast } = useToast();
 
@@ -25,6 +26,15 @@ export default function LandingPage() {
 
   const toggleFlip = useCallback((id: number) => {
     setFlippedKits(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
+
+  const toggleFlipCake = useCallback((id: number) => {
+    setFlippedCakes(prev => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
       else next.add(id);
@@ -359,36 +369,103 @@ export default function LandingPage() {
       {/* CAKE GALLERY */}
       <section id="galeria-de-bolos" className="py-24 bg-muted/50">
         <div className="container mx-auto px-4 md:px-8">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
             className="text-center mb-16"
           >
+            <p className="text-secondary uppercase tracking-[0.3em] text-xs font-semibold mb-4">Confeitaria Artesanal</p>
             <h2 className="font-serif text-3xl md:text-5xl font-bold mb-4">Galeria de Bolos</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">Obras de arte comestíveis criadas para tornar os seus momentos mais memoráveis ainda mais especiais.</p>
+            <p className="text-muted-foreground max-w-2xl mx-auto">Obras de arte comestíveis. Passe o mouse para descobrir cada criação.</p>
             <div className="w-24 h-[2px] bg-secondary mx-auto mt-6"></div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {cakeGallery.map((cake) => (
-              <motion.div 
-                key={cake.id}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                className="relative rounded-2xl overflow-hidden group aspect-[4/3] cursor-pointer"
-              >
-                <img src={cake.image} alt={cake.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                  <h3 className="text-white font-serif text-2xl font-bold mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{cake.name}</h3>
-                  <button className="bg-white text-foreground px-6 py-2 rounded-full font-medium text-sm hover:bg-secondary hover:text-secondary-foreground transition-colors translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                    Ver Detalhes
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cakeGallery.map((cake, index) => {
+              const isFlipped = flippedCakes.has(cake.id);
+              return (
+                <motion.div
+                  key={cake.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="group"
+                  style={{ perspective: "1200px" }}
+                >
+                  <div
+                    onClick={() => toggleFlipCake(cake.id)}
+                    className="relative cursor-pointer"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transition: "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)",
+                      transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                      height: "360px",
+                    }}
+                    onMouseEnter={() => setFlippedCakes(prev => new Set(prev).add(cake.id))}
+                    onMouseLeave={() => setFlippedCakes(prev => { const n = new Set(prev); n.delete(cake.id); return n; })}
+                  >
+                    {/* FRONT FACE */}
+                    <div
+                      className="absolute inset-0 rounded-2xl overflow-hidden"
+                      style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
+                    >
+                      <img src={cake.image} alt={cake.name} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,8,5,0.88) 0%, rgba(26,8,5,0.15) 55%, transparent 100%)" }} />
+                      <div className="absolute inset-0 rounded-2xl border border-secondary/20 group-hover:border-secondary/60 transition-colors duration-500" />
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <p className="text-secondary text-xs uppercase tracking-widest font-semibold mb-1">Sob Encomenda</p>
+                        <h3 className="font-serif text-xl font-bold text-white">{cake.name}</h3>
+                        <div className="flex items-center gap-2 mt-3 text-white/50 text-xs">
+                          <span>Passe o mouse para ver</span>
+                          <div className="flex-1 h-px bg-white/20" />
+                        </div>
+                      </div>
+                      <div className="absolute top-4 right-4 w-7 h-7 border-t-2 border-r-2 border-secondary/50 rounded-tr-lg" />
+                      <div className="absolute top-4 left-4 w-7 h-7 border-t-2 border-l-2 border-secondary/50 rounded-tl-lg" />
+                    </div>
+
+                    {/* BACK FACE */}
+                    <div
+                      className="absolute inset-0 rounded-2xl flex flex-col justify-between p-7"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                        background: "linear-gradient(145deg, #3D1508 0%, #2C1006 100%)",
+                        border: "1px solid rgba(201,168,76,0.4)",
+                      }}
+                    >
+                      <div className="flex flex-col items-center text-center">
+                        <div className="flex items-center gap-3 mb-5">
+                          <div className="h-px w-8 bg-secondary/60" />
+                          <div className="w-1.5 h-1.5 rounded-full bg-secondary" />
+                          <div className="h-px w-8 bg-secondary/60" />
+                        </div>
+                        <p className="text-secondary text-xs uppercase tracking-[0.3em] font-semibold mb-3">Criação Artesanal</p>
+                        <h3 className="font-serif text-2xl font-bold text-white mb-4">{cake.name}</h3>
+                        <p className="text-white/60 text-sm leading-relaxed">{cake.description}</p>
+                      </div>
+
+                      <div className="flex items-center gap-3 my-2">
+                        <div className="flex-1 h-px bg-secondary/20" />
+                        <div className="text-secondary text-xs">✦</div>
+                        <div className="flex-1 h-px bg-secondary/20" />
+                      </div>
+
+                      <div className="flex flex-col gap-3">
+                        <button className="w-full py-3 rounded-xl font-bold text-sm transition-all active:scale-95" style={{ background: "linear-gradient(135deg, #C9A84C, #E8C96A)", color: "#1A0805" }}>
+                          Encomendar Agora
+                        </button>
+                        <p className="text-white/30 text-xs text-center">Personalização disponível</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
