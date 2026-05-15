@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Search, User, Heart, ShoppingCart, Menu, Star, Play, Truck, BookOpen, Users, Leaf, X } from "lucide-react";
 import { FaInstagram, FaFacebookF, FaPinterest } from "react-icons/fa";
@@ -9,7 +9,17 @@ export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [cartItems, setCartItems] = useState(0);
+  const [flippedKits, setFlippedKits] = useState<Set<number>>(new Set());
   const { toast } = useToast();
+
+  const toggleFlip = useCallback((id: number) => {
+    setFlippedKits(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -303,48 +313,158 @@ export default function LandingPage() {
       </section>
 
       {/* GIFT KITS */}
-      <section id="kits" className="py-24 bg-[#2C1006] text-white">
-        <div className="container mx-auto px-4 md:px-8">
-          <motion.div 
+      <section id="kits" className="py-28 text-white relative overflow-hidden" style={{ background: "linear-gradient(135deg, #1A0805 0%, #2C1006 50%, #1A0805 100%)" }}>
+        {/* Decorative gold orbs */}
+        <div className="absolute top-20 left-[-80px] w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #C9A84C, transparent)" }}></div>
+        <div className="absolute bottom-20 right-[-80px] w-80 h-80 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #C9A84C, transparent)" }}></div>
+
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="text-center mb-16"
+            className="text-center mb-6"
           >
-            <h2 className="font-serif text-3xl md:text-5xl font-bold mb-4 text-secondary">Kits & Presentes Exclusivos</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">Surpreenda quem você ama com experiências completas em caixas luxuosas.</p>
-            <div className="w-24 h-[2px] bg-primary mx-auto mt-6"></div>
+            <p className="text-secondary uppercase tracking-[0.3em] text-xs font-semibold mb-4">Coleção Exclusiva</p>
+            <h2 className="font-serif text-4xl md:text-6xl font-bold mb-5 text-white">
+              Kits &amp; <span className="text-secondary italic">Presentes</span>
+            </h2>
+            <p className="text-white/50 max-w-xl mx-auto text-sm leading-relaxed">
+              Cada caixa é uma obra de arte. Passe o mouse para descobrir o que há dentro.
+            </p>
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <div className="h-px w-16 bg-secondary/40"></div>
+              <div className="w-2 h-2 rounded-full bg-secondary"></div>
+              <div className="h-px w-16 bg-secondary/40"></div>
+            </div>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {giftKits.map((kit) => (
-              <motion.div 
-                key={kit.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-[#3D1508] rounded-2xl border border-secondary/20 overflow-hidden flex flex-col group hover:border-secondary/60 transition-colors"
-              >
-                <div className="aspect-[5/4] overflow-hidden">
-                  <img src={kit.image} alt={kit.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                </div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="font-serif text-2xl font-bold mb-2">{kit.name}</h3>
-                  <p className="text-gray-400 text-sm mb-6 flex-grow">{kit.description}</p>
-                  <div className="flex items-center justify-between mt-auto">
-                    <span className="text-secondary font-bold text-2xl">R$ {kit.price}</span>
-                    <button 
-                      onClick={() => addToCart(kit.name)}
-                      className="border border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground font-medium px-6 py-2 rounded-full transition-all active:scale-95"
+          {/* Flip Cards Grid */}
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            {giftKits.map((kit, index) => {
+              const isFlipped = flippedKits.has(kit.id);
+              return (
+                <motion.div
+                  key={kit.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  className="group"
+                  style={{ perspective: "1200px" }}
+                >
+                  {/* Card wrapper — flips on hover (desktop) or click (mobile) */}
+                  <div
+                    data-testid={`kit-card-${kit.id}`}
+                    onClick={() => toggleFlip(kit.id)}
+                    className="relative cursor-pointer"
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transition: "transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)",
+                      transform: isFlipped ? "rotateY(180deg)" : "rotateY(0deg)",
+                      height: "420px",
+                    }}
+                    onMouseEnter={() => setFlippedKits(prev => new Set(prev).add(kit.id))}
+                    onMouseLeave={() => setFlippedKits(prev => { const n = new Set(prev); n.delete(kit.id); return n; })}
+                  >
+                    {/* FRONT FACE */}
+                    <div
+                      className="absolute inset-0 rounded-2xl overflow-hidden"
+                      style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
                     >
-                      Encomendar
-                    </button>
+                      <img
+                        src={kit.image}
+                        alt={kit.name}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Gold vignette overlay */}
+                      <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(26,8,5,0.85) 0%, rgba(26,8,5,0.2) 50%, transparent 100%)" }}></div>
+                      {/* Gold border shimmer */}
+                      <div className="absolute inset-0 rounded-2xl border border-secondary/30 group-hover:border-secondary/70 transition-colors duration-500"></div>
+                      {/* Bottom label */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6">
+                        <p className="text-secondary text-xs uppercase tracking-widest font-semibold mb-1">Exclusivo</p>
+                        <h3 className="font-serif text-2xl font-bold text-white">{kit.name}</h3>
+                        <div className="flex items-center gap-2 mt-3 text-white/60 text-xs">
+                          <span>Passe o mouse para ver</span>
+                          <div className="flex-1 h-px bg-white/20"></div>
+                        </div>
+                      </div>
+                      {/* Corner accent */}
+                      <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-secondary/60 rounded-tr-lg"></div>
+                      <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-secondary/60 rounded-tl-lg"></div>
+                    </div>
+
+                    {/* BACK FACE */}
+                    <div
+                      className="absolute inset-0 rounded-2xl flex flex-col justify-between p-8"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        WebkitBackfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                        background: "linear-gradient(145deg, #3D1508 0%, #2C1006 100%)",
+                        border: "1px solid rgba(201,168,76,0.4)",
+                      }}
+                    >
+                      {/* Top gold ornament */}
+                      <div className="flex flex-col items-center text-center">
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="h-px w-8 bg-secondary/60"></div>
+                          <div className="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+                          <div className="h-px w-8 bg-secondary/60"></div>
+                        </div>
+                        <p className="text-secondary text-xs uppercase tracking-[0.3em] font-semibold mb-3">Kit Premium</p>
+                        <h3 className="font-serif text-3xl font-bold text-white mb-4">{kit.name}</h3>
+                        <p className="text-white/60 text-sm leading-relaxed">{kit.description}</p>
+                      </div>
+
+                      {/* Middle divider */}
+                      <div className="flex items-center gap-3 my-4">
+                        <div className="flex-1 h-px bg-secondary/20"></div>
+                        <div className="text-secondary text-xs">✦</div>
+                        <div className="flex-1 h-px bg-secondary/20"></div>
+                      </div>
+
+                      {/* Bottom price + CTA */}
+                      <div className="flex flex-col items-center gap-4">
+                        <div className="text-center">
+                          <p className="text-white/40 text-xs uppercase tracking-wider mb-1">A partir de</p>
+                          <span className="font-serif text-4xl font-bold text-secondary">R$ {kit.price}</span>
+                        </div>
+                        <button
+                          data-testid={`btn-encomend-kit-${kit.id}`}
+                          onClick={(e) => { e.stopPropagation(); addToCart(kit.name); }}
+                          className="w-full py-3.5 rounded-full font-semibold text-sm tracking-wide transition-all duration-300 hover:scale-105 active:scale-95"
+                          style={{ background: "linear-gradient(90deg, #C9A84C, #E8C96A, #C9A84C)", color: "#1A0805" }}
+                        >
+                          Encomendar Agora
+                        </button>
+                        {/* Bottom corner accents */}
+                        <div className="flex items-center gap-2 text-white/30 text-xs">
+                          <span>Entrega especial disponível</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mt-16"
+          >
+            <p className="text-white/40 text-sm mb-4">Kits personalizados também disponíveis</p>
+            <a href="#contato" className="inline-flex items-center gap-2 border border-secondary/50 text-secondary hover:bg-secondary/10 transition-colors px-8 py-3 rounded-full text-sm font-medium tracking-wide">
+              Fale Conosco para Encomendas Especiais
+            </a>
+          </motion.div>
         </div>
       </section>
 
