@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "O Docinho"
+version = "1.0.0"
+id = "artifacts/o-docinho"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23823
+
+[services.development]
+run = "pnpm --filter @workspace/o-docinho run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/o-docinho", "run", "build" ]
+publicDir = "artifacts/o-docinho/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23823"
+BASE_PATH = "/"
