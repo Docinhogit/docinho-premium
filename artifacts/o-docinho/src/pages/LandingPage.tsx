@@ -779,7 +779,7 @@ export default function LandingPage() {
             Q133,30 128,44 Q123,64 108,64 Q93,64 88,44 Q83,30 57,30
             Q30,30 25,52 Q20,78 5,78 Q0,78 0,78
             L0,0 Z"
-            fill="#C4773B"
+            fill="#fff5f7"
           />
         </svg>
       </div>
@@ -851,7 +851,7 @@ export default function LandingPage() {
           {/* Bottom */}
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-500 text-sm text-center md:text-left">
-              &copy; 2024 O Docinho. Todos os direitos reservados.
+              &copy; 2026 O Docinho. Todos os direitos reservados.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground transition-all">
