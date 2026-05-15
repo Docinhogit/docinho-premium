@@ -21,6 +21,7 @@ export const categories = [
   { id: 2, name: "Gourmet", image: imgCoco },
   { id: 3, name: "Bolos Decorados", image: imgPinkRoses },
   { id: 4, name: "Sobremesas", image: imgRedVelvet },
+  { id: 5, name: "Fitness", image: imgGrid12 },
 ];
 
 export const bestSellers = [

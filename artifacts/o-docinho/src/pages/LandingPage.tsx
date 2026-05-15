@@ -174,20 +174,20 @@ export default function LandingPage() {
       </section>
 
       {/* CATEGORIES SECTION */}
-      <section id="cardapio" className="py-24 bg-background">
+      <section id="cardapio" className="pt-24 pb-28 relative overflow-visible" style={{ background: "#3D1508" }}>
         <div className="container mx-auto px-4 md:px-8">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
             className="text-center mb-16"
           >
-            <h2 className="font-serif text-3xl md:text-5xl font-bold mb-4">O que o teu coração deseja?</h2>
+            <h2 className="font-serif text-3xl md:text-5xl font-bold mb-4 text-white">O que o teu coração deseja?</h2>
             <div className="w-24 h-[2px] bg-secondary mx-auto"></div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -196,14 +196,44 @@ export default function LandingPage() {
           >
             {categories.map((category) => (
               <motion.div key={category.id} variants={fadeInUp} className="min-w-[200px] md:min-w-0 flex-1 snap-center group cursor-pointer">
-                <div className="relative overflow-hidden mb-4 rounded-t-[50%] rounded-b-2xl transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-lg aspect-[3/4]">
+                <div className="relative overflow-hidden mb-4 rounded-t-[50%] rounded-b-2xl transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-xl aspect-[3/4] border-2 border-white/10 group-hover:border-secondary/50">
                   <img src={category.image} alt={category.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
                 </div>
-                <h3 className="text-center font-serif text-xl font-medium group-hover:text-primary transition-colors">{category.name}</h3>
+                <h3 className="text-center font-serif text-xl font-medium text-white/90 group-hover:text-secondary transition-colors">{category.name}</h3>
               </motion.div>
             ))}
           </motion.div>
+        </div>
+
+        {/* Chocolate drip flowing into next section */}
+        <div className="absolute bottom-0 left-0 w-full pointer-events-none z-10" style={{ transform: "translateY(98%)" }}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1440 120"
+            width="100%"
+            height="120"
+            preserveAspectRatio="none"
+            style={{ display: "block" }}
+          >
+            <path
+              d="M0,0 L1440,0 L1440,30
+              Q1385,95 1330,30
+              Q1275,55 1220,30
+              Q1150,115 1080,30
+              Q1025,65 970,30
+              Q900,100 830,30
+              Q775,52 720,30
+              Q655,110 590,30
+              Q530,70 470,30
+              Q400,108 330,30
+              Q275,58 220,30
+              Q150,115 80,30
+              Q40,85 0,30
+              Z"
+              fill="#3D1508"
+            />
+          </svg>
         </div>
       </section>
 
