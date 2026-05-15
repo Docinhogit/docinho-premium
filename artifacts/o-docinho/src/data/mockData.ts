@@ -30,6 +30,49 @@ export const giftKits = [
   { id: 3, name: "Kit Chá de Bebê", description: "Doçura para os momentos mais especiais", price: 420, image: "https://images.unsplash.com/photo-1543878977-dd762c6cf42d?w=500&h=400&fit=crop" }
 ];
 
+export const testimonials = [
+  {
+    id: 1,
+    name: "Ana Carolina Silva",
+    city: "São Paulo, SP",
+    rating: 5,
+    text: "O bolo de casamento foi absolutamente perfeito. Cada detalhe transmitiu elegância e o sabor superou todas as expectativas. Os nossos convidados ainda falam sobre isso meses depois!",
+    avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop&crop=face"
+  },
+  {
+    id: 2,
+    name: "Beatriz Fernandes",
+    city: "Rio de Janeiro, RJ",
+    rating: 5,
+    text: "Encomendei o Kit Festa Completo para o aniversário da minha filha e foi um sucesso absoluto. A apresentação é de luxo e os doces são simplesmente divinos. Já se tornaram os meus favoritos!",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face"
+  },
+  {
+    id: 3,
+    name: "Mariana Costa",
+    city: "Belo Horizonte, MG",
+    rating: 5,
+    text: "Os macarons são genuinamente os melhores que já provei. Crocantes por fora, macios por dentro e com sabores que explodem na boca. A O Docinho elevou o padrão da confeitaria artesanal.",
+    avatar: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&h=100&fit=crop&crop=face"
+  },
+  {
+    id: 4,
+    name: "Juliana Mendes",
+    city: "Curitiba, PR",
+    rating: 5,
+    text: "Presenteei minha mãe com a Caixa de Presentes Luxo e ela chorou de emoção ao abrir. A embalagem é linda e os doces são feitos com tanto carinho que se sente em cada mordida. Vale cada centavo.",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+  },
+  {
+    id: 5,
+    name: "Fernanda Oliveira",
+    city: "Porto Alegre, RS",
+    rating: 5,
+    text: "A torta de morango é uma obra de arte comestível. Fresca, leve, com um equilíbrio perfeito entre doçura e acidez. A entrega foi pontual e a embalagem impecável. Voltarei sempre!",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face"
+  }
+];
+
 export const socialPosts = [
   { id: 1, image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=400&fit=crop", hasVideo: true },
   { id: 2, image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=400&fit=crop", hasVideo: false },

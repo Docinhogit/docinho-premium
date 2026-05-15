@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
-import { Search, User, Heart, ShoppingCart, Menu, Star, Play, Truck, BookOpen, Users, Leaf, X } from "lucide-react";
+import { Search, User, Heart, ShoppingCart, Menu, Star, Play, Truck, BookOpen, Users, Leaf, X, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { FaInstagram, FaFacebookF, FaPinterest } from "react-icons/fa";
-import { categories, bestSellers, cakeGallery, giftKits, socialPosts } from "../data/mockData";
+import { categories, bestSellers, cakeGallery, giftKits, socialPosts, testimonials } from "../data/mockData";
 import { useToast } from "@/hooks/use-toast";
 
 export default function LandingPage() {
@@ -10,7 +10,18 @@ export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [cartItems, setCartItems] = useState(0);
   const [flippedKits, setFlippedKits] = useState<Set<number>>(new Set());
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveTestimonial(prev => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const prevTestimonial = () => setActiveTestimonial(prev => (prev - 1 + testimonials.length) % testimonials.length);
+  const nextTestimonial = () => setActiveTestimonial(prev => (prev + 1) % testimonials.length);
 
   const toggleFlip = useCallback((id: number) => {
     setFlippedKits(prev => {
@@ -492,6 +503,101 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ABOUT SECTION */}
+      <section id="sobre" className="py-24 bg-background overflow-hidden">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Photo side */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative"
+            >
+              {/* Main large photo */}
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop"
+                  alt="A nossa cozinha"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(44,16,6,0.4) 0%, transparent 60%)" }}></div>
+              </div>
+              {/* Floating badge */}
+              <div className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-5 flex items-center gap-4 border border-muted">
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Star size={24} className="fill-secondary text-secondary" />
+                </div>
+                <div>
+                  <p className="font-bold text-2xl text-foreground leading-none mb-0.5">+15 Anos</p>
+                  <p className="text-muted-foreground text-xs">de receitas artesanais</p>
+                </div>
+              </div>
+              {/* Gold corner accent */}
+              <div className="absolute -top-4 -left-4 w-20 h-20 border-t-4 border-l-4 border-secondary/60 rounded-tl-2xl"></div>
+            </motion.div>
+
+            {/* Text side */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="flex flex-col gap-6"
+            >
+              <div>
+                <p className="text-secondary uppercase tracking-[0.3em] text-xs font-semibold mb-4">A Nossa História</p>
+                <h2 className="font-serif text-4xl md:text-5xl font-bold leading-tight mb-6">
+                  Feito com Amor,<br />
+                  <span className="text-primary italic">Servido com Alma</span>
+                </h2>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-px flex-1 bg-border"></div>
+                  <div className="w-2 h-2 rounded-full bg-secondary flex-shrink-0"></div>
+                </div>
+              </div>
+
+              <p className="text-muted-foreground leading-relaxed text-base">
+                Nascemos de uma paixão genuína pelos sabores da infância e pela arte da confeitaria francesa. Em 2010, a nossa fundadora Ana Luísa transformou a cozinha de casa no laboratório de receitas que hoje encanta milhares de famílias em todo o Brasil.
+              </p>
+              <p className="text-muted-foreground leading-relaxed text-base">
+                Cada doce que sai da nossa cozinha carrega ingredientes selecionados, técnicas apuradas e o carinho de quem entende que um bom doce não alimenta apenas o corpo — alimenta a memória e o coração.
+              </p>
+
+              {/* Stats row */}
+              <div className="grid grid-cols-3 gap-4 py-8 border-y border-border">
+                {[
+                  { value: "15+", label: "Anos de receitas" },
+                  { value: "8K+", label: "Pedidos entregues" },
+                  { value: "500+", label: "Receitas únicas" },
+                ].map((stat) => (
+                  <div key={stat.label} className="text-center">
+                    <p className="font-serif text-3xl font-bold text-primary">{stat.value}</p>
+                    <p className="text-muted-foreground text-xs mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <a
+                  href="#cardapio"
+                  className="inline-flex items-center justify-center bg-primary text-white font-semibold px-8 py-4 rounded-full hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all shadow-md"
+                >
+                  Ver o Cardápio
+                </a>
+                <a
+                  href="#contato"
+                  className="inline-flex items-center justify-center border border-primary text-primary font-semibold px-8 py-4 rounded-full hover:bg-primary/5 hover:scale-105 active:scale-95 transition-all"
+                >
+                  Fale Connosco
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* SOCIAL FEED */}
       <section id="social" className="py-20 bg-background overflow-hidden">
         <div className="container mx-auto px-4 md:px-8">
@@ -516,6 +622,132 @@ export default function LandingPage() {
                   <FaInstagram className="text-white text-3xl" />
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS SLIDER */}
+      <section className="py-28 relative overflow-hidden" style={{ background: "linear-gradient(160deg, #fff5f7 0%, #fff 50%, #fff9f0 100%)" }}>
+        {/* Decorative large quote */}
+        <div className="absolute top-12 left-1/2 -translate-x-1/2 opacity-[0.04] pointer-events-none select-none">
+          <Quote size={280} className="text-primary" />
+        </div>
+
+        <div className="container mx-auto px-4 md:px-8 relative z-10">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <p className="text-secondary uppercase tracking-[0.3em] text-xs font-semibold mb-4">Depoimentos</p>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold mb-3">O que dizem os nossos</h2>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-primary italic">clientes apaixonados</h2>
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <div className="h-px w-16 bg-secondary/40"></div>
+              <div className="w-2 h-2 rounded-full bg-secondary"></div>
+              <div className="h-px w-16 bg-secondary/40"></div>
+            </div>
+          </motion.div>
+
+          {/* Slider */}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Main card */}
+            <div className="relative overflow-hidden">
+              <motion.div
+                key={activeTestimonial}
+                initial={{ opacity: 0, x: 60 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -60 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="bg-white rounded-3xl shadow-xl p-10 md:p-14 border border-border/60"
+              >
+                {/* Quote icon */}
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-8">
+                  <Quote size={20} className="text-primary" />
+                </div>
+
+                {/* Stars */}
+                <div className="flex gap-1 mb-6">
+                  {Array.from({ length: testimonials[activeTestimonial].rating }).map((_, i) => (
+                    <Star key={i} size={18} className="fill-secondary text-secondary" />
+                  ))}
+                </div>
+
+                {/* Text */}
+                <blockquote className="font-serif text-xl md:text-2xl text-foreground leading-relaxed mb-10 italic">
+                  "{testimonials[activeTestimonial].text}"
+                </blockquote>
+
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <img
+                    src={testimonials[activeTestimonial].avatar}
+                    alt={testimonials[activeTestimonial].name}
+                    className="w-14 h-14 rounded-full object-cover border-2 border-secondary/40"
+                  />
+                  <div>
+                    <p className="font-semibold text-foreground">{testimonials[activeTestimonial].name}</p>
+                    <p className="text-muted-foreground text-sm">{testimonials[activeTestimonial].city}</p>
+                  </div>
+                  {/* Gold line accent */}
+                  <div className="flex-1 h-px bg-gradient-to-r from-secondary/40 to-transparent ml-4 hidden md:block"></div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Navigation arrows */}
+            <button
+              data-testid="btn-prev-testimonial"
+              onClick={prevTestimonial}
+              className="absolute -left-5 md:-left-14 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white border border-border shadow-md flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all active:scale-95"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              data-testid="btn-next-testimonial"
+              onClick={nextTestimonial}
+              className="absolute -right-5 md:-right-14 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white border border-border shadow-md flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all active:scale-95"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+
+          {/* Dots */}
+          <div className="flex items-center justify-center gap-2.5 mt-10">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                data-testid={`dot-testimonial-${i}`}
+                onClick={() => setActiveTestimonial(i)}
+                className={`rounded-full transition-all duration-300 ${
+                  i === activeTestimonial
+                    ? "w-8 h-2.5 bg-primary"
+                    : "w-2.5 h-2.5 bg-border hover:bg-primary/40"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Mini previews */}
+          <div className="hidden md:flex items-center justify-center gap-4 mt-10">
+            {testimonials.map((t, i) => (
+              <button
+                key={t.id}
+                onClick={() => setActiveTestimonial(i)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 ${
+                  i === activeTestimonial
+                    ? "border-primary bg-primary/5 shadow-sm"
+                    : "border-transparent hover:border-border"
+                }`}
+              >
+                <img src={t.avatar} alt={t.name} className="w-7 h-7 rounded-full object-cover" />
+                <span className={`text-xs font-medium ${i === activeTestimonial ? "text-primary" : "text-muted-foreground"}`}>
+                  {t.name.split(" ")[0]}
+                </span>
+              </button>
             ))}
           </div>
         </div>
