@@ -561,34 +561,34 @@ export default function LandingPage() {
                         backfaceVisibility: "hidden",
                         WebkitBackfaceVisibility: "hidden",
                         transform: "rotateY(180deg)",
-                        background: "linear-gradient(145deg, #3D1508 0%, #2C1006 100%)",
-                        border: "1px solid rgba(201,168,76,0.4)",
+                        background: "linear-gradient(145deg, #FFF8F2 0%, #FFF0E5 100%)",
+                        border: "1px solid rgba(201,168,76,0.5)",
                       }}
                     >
                       {/* Top gold ornament */}
                       <div className="flex flex-col items-center text-center">
                         <div className="flex items-center gap-3 mb-6">
-                          <div className="h-px w-8 bg-secondary/60"></div>
+                          <div className="h-px w-8 bg-secondary/70"></div>
                           <div className="w-1.5 h-1.5 rounded-full bg-secondary"></div>
-                          <div className="h-px w-8 bg-secondary/60"></div>
+                          <div className="h-px w-8 bg-secondary/70"></div>
                         </div>
                         <p className="text-secondary text-xs uppercase tracking-[0.3em] font-semibold mb-3">Kit Premium</p>
-                        <h3 className="font-serif text-3xl font-bold text-white mb-4">{kit.name}</h3>
-                        <p className="text-white/60 text-sm leading-relaxed">{kit.description}</p>
+                        <h3 className="font-serif text-3xl font-bold text-[#2C1006] mb-4">{kit.name}</h3>
+                        <p className="text-[#2C1006]/65 text-sm leading-relaxed">{kit.description}</p>
                       </div>
 
                       {/* Middle divider */}
                       <div className="flex items-center gap-3 my-4">
-                        <div className="flex-1 h-px bg-secondary/20"></div>
+                        <div className="flex-1 h-px bg-secondary/30"></div>
                         <div className="text-secondary text-xs">✦</div>
-                        <div className="flex-1 h-px bg-secondary/20"></div>
+                        <div className="flex-1 h-px bg-secondary/30"></div>
                       </div>
 
                       {/* Bottom price + CTA */}
                       <div className="flex flex-col items-center gap-4">
                         <div className="text-center">
-                          <p className="text-white/40 text-xs uppercase tracking-wider mb-1">A partir de</p>
-                          <span className="font-serif text-4xl font-bold text-secondary">R$ {kit.price}</span>
+                          <p className="text-[#2C1006]/50 text-xs uppercase tracking-wider mb-1">A partir de</p>
+                          <span className="font-serif text-4xl font-bold text-[#2C1006]">R$ {kit.price}</span>
                         </div>
                         <button
                           data-testid={`btn-encomend-kit-${kit.id}`}
@@ -598,8 +598,7 @@ export default function LandingPage() {
                         >
                           Encomendar Agora
                         </button>
-                        {/* Bottom corner accents */}
-                        <div className="flex items-center gap-2 text-white/30 text-xs">
+                        <div className="flex items-center gap-2 text-[#2C1006]/40 text-xs">
                           <span>Entrega especial disponível</span>
                         </div>
                       </div>
