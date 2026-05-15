@@ -78,9 +78,8 @@ export default function LandingPage() {
             <button className="md:hidden text-foreground hover:text-primary transition-colors" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-            <a href="#home" className="flex flex-col items-center">
-              <span className="font-serif italic text-2xl md:text-3xl text-secondary font-bold">O docinho</span>
-              <span className="w-12 h-[2px] bg-secondary mt-1 rounded-full"></span>
+            <a href="#home" className="flex items-center">
+              <img src="/logo-odocinho.png" alt="O Docinho" className="h-14 md:h-16 w-auto object-contain" />
             </a>
           </div>
 
@@ -970,9 +969,8 @@ export default function LandingPage() {
           {/* Main Footer Content */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             <div>
-              <div className="flex flex-col items-start mb-6">
-                <span className="font-serif italic text-3xl text-white font-bold mb-1">O docinho</span>
-                <span className="w-12 h-[2px] bg-secondary rounded-full"></span>
+              <div className="mb-6">
+                <img src="/logo-odocinho.png" alt="O Docinho" className="h-20 w-auto object-contain" style={{ filter: "brightness(0) invert(1)" }} />
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
                 Transformando açúcar, farinha e muito amor em momentos inesquecíveis desde 2010. O verdadeiro sabor artesanal na sua casa.
@@ -1015,6 +1013,16 @@ export default function LandingPage() {
             <p className="text-gray-500 text-sm text-center md:text-left">
               &copy; 2026 O Docinho. Todos os direitos reservados.
             </p>
+            {/* Seal */}
+            <div className="flex flex-col items-center gap-1">
+              <img
+                src="/logo-odocinho.png"
+                alt="Selo O Docinho"
+                className="h-14 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+              <span className="text-white/20 text-[9px] uppercase tracking-[0.2em]">Feito com amor</span>
+            </div>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary hover:text-secondary-foreground transition-all">
                 <FaInstagram size={18} />
