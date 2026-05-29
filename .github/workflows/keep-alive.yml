@@ -1,0 +1,25 @@
+name: Keep Supabase Alive
+
+on:
+  schedule:
+    # Executa todos os dias à meia-noite (00:00 UTC)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Permite execução manual pela interface do GitHub
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send ping query to Supabase REST API
+        run: |
+          echo "Sending keep-alive request to Supabase..."
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/categories?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+          
+          echo "Supabase API responded with status code: $STATUS_CODE"
+          if [ "$STATUS_CODE" -eq 200 ] || [ "$STATUS_CODE" -eq 204 ] || [ "$STATUS_CODE" -eq 404 ]; then
+            echo "Success! Supabase is awake."
+          else
+            echo "Warning: Received unexpected status code $STATUS_CODE. But connection was made."
+          fi
